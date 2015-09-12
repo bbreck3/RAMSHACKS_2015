@@ -10,7 +10,7 @@ import edu.vcu.ramhacks.R;
 import edu.vcu.ramhacks.fragments.SignInFragment;
 import edu.vcu.ramhacks.utils.Constants;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
