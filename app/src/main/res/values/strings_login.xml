@@ -1,0 +1,45 @@
+<resources>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_email_required">Email</string>
+    <string name="prompt_password_required">Password</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_first_name">First name</string>
+    <string name="prompt_last_name">Last name</string>
+    <string name="prompt_partner_name">Partner name</string>
+    <string name="prompt_password_confirm">Confirm password</string>
+    <string name="prompt_email_reset">Registered email</string>
+    <string name="prompt_about">About</string>
+    <string name="prompt_new_password_confirm">Confirm new password</string>
+    <string name="prompt_new_password_required">New password</string>
+
+    <string name="hint_email_reset">Please check your email for reset link</string>
+    <string name="hint_email_reset_sent">A password reset link has been sent to your email.</string>
+    <string name="hint_sign_up_complete">Registration successful. Please check your email for confirmation.</string>
+    <string name="hint_notifications">Notifications</string>
+    <string name="hint_change_password">Change Password</string>
+    <string name="hint_welcome">Welcome to ramhacks Timer</string>
+    <string name="hint_create_account">New account</string>
+
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_up">Sign up</string>
+    <string name="action_register">Register</string>
+    <string name="action_go_to_sign_up">Not registered? Sign up!</string>
+    <string name="action_go_to_sign_in">Already have an account? Sign in!</string>
+    <string name="action_go_to_back">Back to sign in</string>
+    <string name="action_forgot_password">Forgot password?</string>
+    <string name="action_send">Send</string>
+
+    <string name="error_invalid_email">Invalid email address</string>
+    <string name="error_invalid_password">Password is too short</string>
+    <string name="error_incorrect_password">Incorrect email or password</string>
+    <string name="error_field_required">Field is required</string>
+    <string name="error_password_mismatch">The passwords don’t match</string>
+    <string name="error_invalid_credentials">Invalid username or password.</string>
+    <string name="error_invalid_card_number">Card number must have 10 digits.</string>
+    <string name="error_sign_up" formatted="false">Something went wrong…\n%s</string>
+    <string name="error_privacy_and_terms">You must accept both the terms of service and the privacy policy.</string>
+</resources>
