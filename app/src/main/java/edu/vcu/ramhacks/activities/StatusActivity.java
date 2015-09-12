@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import edu.vcu.ramhacks.R;
 
-public class MainActivity extends AppCompatActivity {
+public class StatusActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
