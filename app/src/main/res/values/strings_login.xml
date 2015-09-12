@@ -2,9 +2,9 @@
     
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
+    <string name="prompt_user">User</string>
     <string name="prompt_password">Password</string>
-    <string name="prompt_email_required">Email</string>
+    <string name="prompt_user_required">User</string>
     <string name="prompt_password_required">Password</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_first_name">First name</string>

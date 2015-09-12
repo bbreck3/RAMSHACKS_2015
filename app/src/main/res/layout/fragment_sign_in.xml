@@ -39,12 +39,12 @@
                     android:text="@string/hint_welcome"/>
 
                 <EditText
-                    android:id="@+id/edit_sign_in_email"
+                    android:id="@+id/edit_sign_in_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:hint="@string/prompt_email"
+                    android:hint="@string/prompt_user"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"

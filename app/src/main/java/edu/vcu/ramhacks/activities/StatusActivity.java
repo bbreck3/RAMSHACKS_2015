@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import edu.vcu.ramhacks.R;
+import edu.vcu.ramhacks.RamApplication;
 
 public class StatusActivity extends BaseActivity {
 
@@ -15,10 +16,8 @@ public class StatusActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //TODO: Implement user auth
-        if(true){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+        if(((RamApplication)getApplication()).getUsername()==null){
+            startActivity(LoginActivity.class, null, null);
         }
     }
 }

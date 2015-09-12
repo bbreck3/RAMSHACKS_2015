@@ -9,7 +9,9 @@ import timber.log.Timber;
 
 
 
-public class QuickApplication extends Application{
+public class RamApplication extends Application{
+  private String username;
+
   @Override
   public void onCreate() {
 
@@ -17,5 +19,11 @@ public class QuickApplication extends Application{
     if (BuildConfig.DEBUG) {
       Timber.plant(new Timber.DebugTree());
     }
+  }
+  public String getUsername(){
+    return username;
+  }
+  public void setUsername(String username) {
+    this.username = username;
   }
 }
