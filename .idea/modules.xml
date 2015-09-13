@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ramhacks.iml" filepath="$PROJECT_DIR$/ramhacks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ramhacks/Ramhacks.iml" filepath="$PROJECT_DIR$/ramhacks/Ramhacks.iml" />
     </modules>
   </component>
 </project>
