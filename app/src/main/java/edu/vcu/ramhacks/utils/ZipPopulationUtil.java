@@ -14,7 +14,10 @@ public class ZipPopulationUtil {
     HashMap<Integer, Integer> map = new HashMap<>();
     Resources resources;
 
-    public ZipPopulationUtil(Resources resources) {
+    public ZipPopulationUtil() {
+    }
+
+    public void setResources(Resources resources) {
         this.resources = resources;
     }
 

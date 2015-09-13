@@ -15,7 +15,7 @@ import timber.log.Timber;
 
 public class RamApplication extends Application{
   private String username;
-    final ZipPopulationUtil zipPopulationUtil = new ZipPopulationUtil(getResources());
+    final ZipPopulationUtil zipPopulationUtil = new ZipPopulationUtil();
 
 
 
@@ -26,12 +26,13 @@ public class RamApplication extends Application{
     if (BuildConfig.DEBUG) {
         Timber.plant(new Timber.DebugTree());
     }
+    zipPopulationUtil.setResources(getResources());
     new Thread(new Runnable() {
         @Override
         public void run() {
             zipPopulationUtil.load();
         }
-    });
+    }).start();
     }
     public String getUsername(){
     return username;

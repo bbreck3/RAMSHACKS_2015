@@ -86,11 +86,14 @@ public class AgeFragment extends Fragment {
                                 @Override
                                 public void run() {
                                     ageResultView.clearComposingText();
-                                    ageResultView.setText("Probability: " + result.getProbability()/result.getWeight()
-                                            + "\nZip code: " + (bank.getZipCode() < 0? "not found" : "" + bank.getZipCode())
-                                            + "\nPopulation: " + (bank.getZipCode() < 0? "not found" : "" + zip.getPopulation(bank.getZipCode())));
-                                }
-                            });
+                                    StringBuilder builder = new StringBuilder();
+                                    builder.append("There is a ").append((int) (100 * (result.getProbability() / result.getWeight()))).append(" change that you are over 21. Are we wrong? Our data indicates that you live in a ")
+                                            .append(zip.getPopulation(bank.getZipCode()) > 3000 ? "sparsely " : "densely ").append("populated area. Maybe that has something to do with it?");
+                                    ageResultView.setText(builder.toString());//"Probability: " + result.getProbability()/result.getWeight()
+                                    //+ "\nZip code: " + (bank.getZipCode() < 0? "not found" : "" + bank.getZipCode())
+                                    //+ "\nPopulation: " + (bank.getZipCode() < 0? "not found" : "" + zip.getPopulation(bank.getZipCode())));
+                                    //    }
+                                }});
                             break;
                         case USER_NOT_FOUND:
                             getActivity().runOnUiThread(new Runnable() {
