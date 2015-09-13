@@ -11,8 +11,9 @@
     <string-array name="fragments_array">
         <item>Welcome</item>
         <item>EEG</item>
-        <item>HeartRate</item>
-        <item>StressMonitor</item>
+        <item>Heart Rate</item>
+        <item>Stress Monitor</item>
+        <item>Mental Age Checker</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

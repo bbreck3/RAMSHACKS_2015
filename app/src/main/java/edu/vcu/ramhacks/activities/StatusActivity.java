@@ -25,8 +25,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import edu.vcu.ramhacks.R;
 import edu.vcu.ramhacks.RamApplication;
+import edu.vcu.ramhacks.fragments.AgeFragment;
 import edu.vcu.ramhacks.fragments.EEGFragment;
 import edu.vcu.ramhacks.fragments.HeartRateFragment;
+import edu.vcu.ramhacks.fragments.StressFragment;
 import edu.vcu.ramhacks.fragments.WelcomeFragment;
 
 public class StatusActivity extends BaseActivity {
@@ -148,8 +150,16 @@ public class StatusActivity extends BaseActivity {
             case 2:
                 fragment = new HeartRateFragment();
                 break;
+            case 3:
+                fragment = new StressFragment();
+                break;
+            case 4:
+                fragment = new AgeFragment();
+                break;
             default:
-                return;
+                fragment = new StressFragment();
+                break;
+
         }
 
         FragmentManager fragmentManager = getFragmentManager();

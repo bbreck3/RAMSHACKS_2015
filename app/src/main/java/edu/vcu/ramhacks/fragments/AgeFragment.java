@@ -15,16 +15,21 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import edu.vcu.ramhacks.R;
+import edu.vcu.ramhacks.interfaces.BankCallback;
+import edu.vcu.ramhacks.utils.BankCallbackStatus;
+import edu.vcu.ramhacks.utils.BankUtil;
+import edu.vcu.ramhacks.utils.ZipPopulationUtil;
 
 public class AgeFragment extends Fragment {
     @InjectView(R.id.first_name_box)
-    EditText firstName;
+    EditText firstNameBox;
     @InjectView(R.id.last_name_box)
-    EditText lastName;
+    EditText lastNameBox;
     @InjectView(R.id.submit_button)
-    Button submit;
+    Button submitButton;
     @InjectView(R.id.age_result)
-    TextView ageResult;
+    TextView ageResultView;
+    ZipPopulationUtil zipPopulationUtil;
 
     public static AgeFragment newInstance() {
         AgeFragment fragment = new AgeFragment();
@@ -38,6 +43,7 @@ public class AgeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        zipPopulationUtil = new ZipPopulationUtil(getResources());
     }
 
     @Override
@@ -50,6 +56,61 @@ public class AgeFragment extends Fragment {
     }
     @OnClick(R.id.submit_button)
     public void submitClick(){
-        //Do stuff
+        String firstName = firstNameBox.getText().toString();
+        String lastName = lastNameBox.getText().toString();
+        firstNameBox.setError(null);
+        lastNameBox.setError(null);
+        boolean error = false;
+
+        if(lastName.isEmpty()) {
+            error = true;
+            lastNameBox.setError("Field cannot be empty");
+            lastNameBox.requestFocus();
+        }
+        if(firstName.isEmpty()) {
+            error = true;
+            firstNameBox.setError("Field cannot be empty");
+            firstNameBox.requestFocus();
+        }
+        if(!error){
+            final BankUtil bank = new BankUtil();
+            bank.getProbability(firstName, lastName, new BankCallback() {
+                @Override
+                public void onResult(final BankUtil.ProbWeight result, BankCallbackStatus status) {
+                    switch (status) {
+                        case OK:
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ageResultView.clearComposingText();
+                                    ageResultView.setText("Probability: " + result.getProbability()/result.getWeight()
+                                            + "\nZip code: " + (bank.getZipCode() < 0? "not found" : "" + bank.getZipCode())
+                                            + "\nPopulation: " + (bank.getZipCode() < 0? "not found" : "" + zipPopulationUtil.getPopulation(bank.getZipCode())));
+                                }
+                            });
+                            break;
+                        case USER_NOT_FOUND:
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ageResultView.clearComposingText();
+                                    ageResultView.setText("User not found");
+                                }
+                            });
+                            break;
+                        case UNKNOWN_ERROR:
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ageResultView.clearComposingText();
+                                    ageResultView.setText("Unknown error. Check internet connection.");
+                                }
+                            });
+                            break;
+                    }
+                }
+            });
+        }
+
     }
 }

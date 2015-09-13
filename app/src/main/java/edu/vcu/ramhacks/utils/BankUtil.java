@@ -33,6 +33,7 @@ public class BankUtil {
     private AtomicInteger probabilityRequirements = new AtomicInteger();
     private double totalBalance;
     private int amountOfCreditCards;
+    private int zipCode = -1;
 
     //private final Semaphore semaphore = new Semaphore(0);
 
@@ -137,6 +138,9 @@ public class BankUtil {
                     for (Customer c : accounts) {
                         if (c.getFirst_name().equalsIgnoreCase(firstName) && c.getLast_name().equalsIgnoreCase(lastName)) {
                             customerId = c.get_id();
+                            if(c.getAddress() != null && c.getAddress().getZip() != null) {
+                                zipCode = Integer.valueOf(c.getAddress().getZip());
+                            }
                             getAccounts();
                             return;
                         }
@@ -212,5 +216,9 @@ public class BankUtil {
                 }
             }
         });
+    }
+
+    public int getZipCode() {
+        return this.zipCode;
     }
 }
