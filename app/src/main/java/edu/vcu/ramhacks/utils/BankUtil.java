@@ -99,6 +99,16 @@ public class BankUtil {
                             result += pw.getProbability() * pw.getWeight();
                             weightSum += pw.getWeight();
                         }
+                        if(totalBalance > 1000) {
+                            result += Math.log10(totalBalance)-3;
+                            weightSum += Math.log10(totalBalance)-3;
+                        }
+                        if(amountOfCreditCards == 0) {
+                            weightSum += 0.5;
+                        } else if(amountOfCreditCards < 3) {
+                            result += 0.5;
+                            weightSum += 0.5;
+                        }
                         callback.onResult(new ProbWeight(result, weightSum));
                     }
                 }
@@ -149,7 +159,7 @@ public class BankUtil {
                         for(Account a : accounts) {
                             accountIds.add(a.get_id());
                             totalBalance += a.getBalance();
-                            if(a.getType().toString().equalsIgnoreCase("Credit Card")) {
+                            if(a.getType() != null && a.getType().toString().equalsIgnoreCase("Credit Card")) {
                                 amountOfCreditCards++;
                             }
                         }
