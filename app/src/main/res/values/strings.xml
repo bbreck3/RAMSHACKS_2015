@@ -8,18 +8,25 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="drawers_array">
+        <item>Home</item>
+        <item>Heart Rate</item>
+        <item>EEG</item>
+        <item>Stress Monitor</item>
+        <item> TEst1</item>
+        <item> Test 2</item>
+        <item>  TEst 3</item>
+
+
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="heart_rate">-</string>
+    <string name="default_text">--</string>
+    <string name="picture">This is Picture</string>
+    <string name="description_info">This is description Picture</string>
+    <string name="intro_message">This is a string thing</string>
+
 </resources>
