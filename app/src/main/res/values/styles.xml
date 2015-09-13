@@ -2,7 +2,6 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
     </style>
     <style name="AppTheme.Card.Margins" parent="CardView">
         <item name="android:layout_marginTop">@dimen/margin_normal</item>
@@ -15,6 +14,12 @@
         <item name="cardCornerRadius">@dimen/margin_small</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardBackgroundColor">@android:color/white</item>
+    </style>
+    <style name="Theme.AppCompat.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.Button">
