@@ -26,13 +26,17 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import edu.vcu.ramhacks.R;
 import edu.vcu.ramhacks.RamApplication;
 
 public class StatusActivity extends BaseActivity {
 
     /** Imported From sample code **/
+    @InjectView(R.id.drawer_layout)
     private DrawerLayout mDrawerLayout;
+    @InjectView(R.id.left_drawer)
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -53,12 +57,10 @@ public class StatusActivity extends BaseActivity {
         }
         /** Imported from Sample Code **/
 
-
+        ButterKnife.inject(this);
+        
         mTitle = mDrawerTitle = getTitle();
         mPlanetTitles = getResources().getStringArray(R.array.planets_array);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
