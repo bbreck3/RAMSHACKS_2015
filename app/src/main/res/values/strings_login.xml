@@ -21,7 +21,7 @@
     <string name="hint_sign_up_complete">Registration successful. Please check your email for confirmation.</string>
     <string name="hint_notifications">Notifications</string>
     <string name="hint_change_password">Change Password</string>
-    <string name="hint_welcome">Welcome to ramhacks Timer</string>
+    <string name="hint_welcome">Welcome to RamHealth</string>
     <string name="hint_create_account">New account</string>
 
     <string name="action_sign_in">Sign in</string>
