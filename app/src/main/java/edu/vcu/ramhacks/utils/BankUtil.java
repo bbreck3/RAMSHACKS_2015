@@ -1,9 +1,9 @@
 package edu.vcu.ramhacks.utils;
 
-import com.reimaginebanking.api.java.models.Account;
-import com.reimaginebanking.api.java.models.Customer;
-import com.reimaginebanking.api.java.models.Merchant;
-import com.reimaginebanking.api.java.models.Purchase;
+import com.reimaginebanking.api.java.Models.Account;
+import com.reimaginebanking.api.java.Models.Customer;
+import com.reimaginebanking.api.java.Models.Merchant;
+import com.reimaginebanking.api.java.Models.Purchase;
 import com.reimaginebanking.api.java.NessieClient;
 import com.reimaginebanking.api.java.NessieException;
 import com.reimaginebanking.api.java.NessieResultsListener;
@@ -30,6 +30,8 @@ public class BankUtil {
     private final static double REGEX_PROB = 1, REGEX_WEIGHT = 0.5;
     private AtomicInteger accountsLoaded = new AtomicInteger();
     private AtomicInteger probabilityRequirements = new AtomicInteger();
+    private double totalBalance;
+    private int amountOfCreditCards;
 
     private final Semaphore semaphore = new Semaphore(0);
 
@@ -81,7 +83,7 @@ public class BankUtil {
                     if (e == null) {
                         ArrayList<Purchase> purchases = (ArrayList<Purchase>) o;
                         for (Purchase p : purchases) {
-                            if (merchantIdWeight.containsKey(p.getMerchant_id().toLowerCase())) {
+                            if (merchantIdWeight.containsKey(p.getMerchant_id())) {
                                 ProbWeight pw = merchantIdWeight.get(p.getMerchant_id());
                                 if(pw != null) {
                                     probabilities.add(pw);
@@ -136,6 +138,8 @@ public class BankUtil {
         if(customerId == null) {
             //TODO: error
         } else {
+            amountOfCreditCards = 0;
+            totalBalance = 0;
             nessie.getCustomerAccounts(customerId, new NessieResultsListener() {
                 @Override
                 public void onSuccess(Object o, NessieException e) {
@@ -144,6 +148,10 @@ public class BankUtil {
                         accountIds.clear();
                         for(Account a : accounts) {
                             accountIds.add(a.get_id());
+                            totalBalance += a.getBalance();
+                            if(a.getType().toString().equalsIgnoreCase("Credit Card")) {
+                                amountOfCreditCards++;
+                            }
                         }
                         if(probabilityRequirements.incrementAndGet() == 2) {
                             computeProbability();
