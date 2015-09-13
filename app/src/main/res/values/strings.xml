@@ -25,5 +25,15 @@
     <string name="description_info">This is description Picture</string>
     <string name="intro_message">This is a string thing</string>
     <string name="blank_heartbeat">-</string>
+    <string name="status"> status</string>
+    <string name="refresh"> refresh</string>
+    <string name="connect"> connect</string>
+    <string name="disconnect"> disconnect</string>
+    <string name="undefined"> undefined</string>
+    <string name="eeg">EEG Data:</string>
+    <string name="init_val"> init_val</string>
+    <string name="muse_elem">Alpha:</string>
+    <string name="version"> version</string>
+    <string name="pause"> pause</string>
 
 </resources>
