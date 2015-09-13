@@ -171,11 +171,54 @@ public class EEGFragment extends Fragment implements OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TextView elem1 = (TextView) getView().findViewById(R.id.elem1);
+                         TextView elem1 = (TextView) getView().findViewById(R.id.elem1);
                         TextView elem2 = (TextView) getView().findViewById(R.id.elem2);
                         TextView elem3 = (TextView) getView().findViewById(R.id.elem3);
                         TextView elem4 = (TextView) getView().findViewById(R.id.elem4);
+                        TextView meanelem1 = (TextView) getView().findViewById(R.id.meanelem1);
+                        TextView meanelem2 = (TextView) getView().findViewById(R.id.meanelem2);
+                        TextView meanelem3 = (TextView) getView().findViewById(R.id.meanelem3);
+                        TextView meanelem4 = (TextView) getView().findViewById(R.id.meanelem4);
+                        TextView truth = (TextView) getView().findViewById(R.id.truth);
+                        index++;
+                        if(index == 1000) {
+                            full = true;
+                            index = 0;
+                        }
+                        theta[index] = data.get(Eeg.TP9.ordinal());
+                        alpha[index] = data.get(Eeg.TP9.ordinal());
+                        beta[index] = data.get(Eeg.TP9.ordinal());
+                        gamma[index] = data.get(Eeg.TP9.ordinal());
+                        double SumTheta = 0;
+                        double SumAlpha = 0;
+                        double SumBeta = 0;
+                        double SumGamma = 0;
+                        for(int i =0; i <= index; i++){
+                            SumTheta += theta[i];
+                            SumAlpha += alpha[i];
+                            SumBeta += beta[i];
+                            SumGamma += gamma[i];
+                        }
+                        SumTheta = SumTheta /(double)(index+1);
+                        SumAlpha = SumAlpha /(double)(index+1);
+                        SumBeta = SumBeta /(double)(index+1);
+                        SumGamma = SumGamma /(double)(index+1);
+                        meanelem1.setText(Double.toString(SumTheta));
+                        meanelem2.setText(Double.toString(SumAlpha));
+                        meanelem3.setText(Double.toString(SumBeta));
+                        meanelem4.setText(Double.toString(SumBeta));
+                        double SumDiff = Math.abs(SumTheta - data.get(Eeg.TP9.ordinal())) +
+                                        Math.abs(SumAlpha - data.get(Eeg.FP1.ordinal())) +
+                                Math.abs(SumBeta - data.get(Eeg.FP2.ordinal())) +
+                                Math.abs(SumGamma - data.get(Eeg.TP10.ordinal()));
+                        if(SumDiff > 0.5){
+                            truth.setText("Lie");
 
+                        }
+                        else{
+                            truth.setText("Truth");
+
+                        }
                         elem1.setText(String.format(
                                 "%6.2f", data.get(Eeg.TP9.ordinal())));
                         elem2.setText(String.format(
