@@ -23,6 +23,5 @@
     <string name="picture">This is Picture</string>
     <string name="description_info">This is description Picture</string>
     <string name="intro_message">This is a string thing</string>
-    <string name="blank_heartbeat">-</string>
 
 </resources>
