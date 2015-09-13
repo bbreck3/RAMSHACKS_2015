@@ -3,10 +3,13 @@ package edu.vcu.ramhacks.activities;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,21 +17,27 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import edu.vcu.ramhacks.R;
 import edu.vcu.ramhacks.RamApplication;
 
 public class StatusActivity extends BaseActivity {
 
     /** Imported From sample code **/
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    @InjectView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @InjectView(R.id.left_drawer)
+    ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private CharSequence mDrawerTitle;
@@ -48,12 +57,10 @@ public class StatusActivity extends BaseActivity {
         }
         /** Imported from Sample Code **/
 
+        ButterKnife.inject(this);
 
         mTitle = mDrawerTitle = getTitle();
-        mPlanetTitles = getResources().getStringArray(R.array.drawers_array);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
+        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
@@ -188,7 +195,7 @@ public class StatusActivity extends BaseActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_planet, container, false);
             int i = getArguments().getInt(ARG_PLANET_NUMBER);
-            String planet = getResources().getStringArray(R.array.drawers_array)[i];
+            String planet = getResources().getStringArray(R.array.planets_array)[i];
 
             int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
                     "drawable", getActivity().getPackageName());
