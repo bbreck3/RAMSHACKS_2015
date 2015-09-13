@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RAMHACK.iml" filepath="$PROJECT_DIR$/RAMHACK.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ramhacks.iml" filepath="$PROJECT_DIR$/ramhacks.iml" />
     </modules>
   </component>
 </project>
