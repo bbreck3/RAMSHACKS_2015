@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import edu.vcu.ramhacks.interfaces.BankCallback;
 import timber.log.Timber;
 
 /**
@@ -33,13 +34,15 @@ public class BankUtil {
     private double totalBalance;
     private int amountOfCreditCards;
 
-    private final Semaphore semaphore = new Semaphore(0);
+    //private final Semaphore semaphore = new Semaphore(0);
 
     private String customerId;
     private final ArrayList<String> accountIds = new ArrayList<String>();
     private final ArrayList<ProbWeight> probabilities = new ArrayList<ProbWeight>();
 
     private BankCallback callback;
+
+    private BankCallbackStatus status = BankCallbackStatus.OK;
 
     public class ProbWeight {
         private final double probability;
@@ -92,6 +95,8 @@ public class BankUtil {
                         }
                     } else {
                         Timber.e("Nessie error: " + e);
+                        System.out.println("Nessie error: " + e);
+                        status = BankCallbackStatus.UNKNOWN_ERROR;
                     }
                     if(accountsLoaded.incrementAndGet() == accountIds.size()) {
                         //double result = 0, weightSum = 0;
@@ -109,7 +114,7 @@ public class BankUtil {
                             result += 0.5;
                             weightSum += 0.5;
                         }
-                        callback.onResult(new ProbWeight(result, weightSum));
+                        callback.onResult(new ProbWeight(result, weightSum), status);
                     }
                 }
             });
@@ -136,17 +141,21 @@ public class BankUtil {
                             return;
                         }
                     }
+                    getAccounts();
                 } else {
                     Timber.e("Nessie error: " + e);
+                    System.out.println("Nessie error: " + e);
+                    status = BankCallbackStatus.UNKNOWN_ERROR;
                 }
-                semaphore.release();
+                //semaphore.release();
             }
         });
     }
 
     private void getAccounts() {
         if(customerId == null) {
-            //TODO: error
+            status = BankCallbackStatus.USER_NOT_FOUND;
+            callback.onResult(null, status);
         } else {
             amountOfCreditCards = 0;
             totalBalance = 0;
@@ -168,6 +177,8 @@ public class BankUtil {
                         }
                     } else {
                         Timber.e("Nessie error: " + e);
+                        System.out.println("Nessie error: " + e);
+                        status = BankCallbackStatus.UNKNOWN_ERROR;
                     }
                 }
             });
@@ -196,6 +207,8 @@ public class BankUtil {
                     }
                 } else {
                     Timber.e("Nessie error: " + e);
+                    System.out.println("Nessie error: " + e);
+                    status = BankCallbackStatus.UNKNOWN_ERROR;
                 }
             }
         });
