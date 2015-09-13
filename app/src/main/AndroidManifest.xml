@@ -3,6 +3,7 @@
     package="edu.vcu.ramhacks" >
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".RamApplication"
         android:allowBackup="true"
