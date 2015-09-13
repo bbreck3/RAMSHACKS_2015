@@ -18,7 +18,6 @@ public class ZipPopulationUtil {
             while(sc.hasNext()) {
                 int a, b;
                 a=sc.nextInt();
-                sc.skip(Pattern.compile(","));
                 b = sc.nextInt();
                 map.put(a,b);
             }
