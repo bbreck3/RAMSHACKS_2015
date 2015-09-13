@@ -35,9 +35,9 @@ public class StatusActivity extends BaseActivity {
 
     /** Imported From sample code **/
     @InjectView(R.id.drawer_layout)
-    private DrawerLayout mDrawerLayout;
+    DrawerLayout mDrawerLayout;
     @InjectView(R.id.left_drawer)
-    private ListView mDrawerList;
+    ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private CharSequence mDrawerTitle;
@@ -58,7 +58,7 @@ public class StatusActivity extends BaseActivity {
         /** Imported from Sample Code **/
 
         ButterKnife.inject(this);
-        
+
         mTitle = mDrawerTitle = getTitle();
         mPlanetTitles = getResources().getStringArray(R.array.planets_array);
         // set a custom shadow that overlays the main content when the drawer opens
