@@ -151,9 +151,6 @@ public class StatusActivity extends BaseActivity {
                 fragment = new HeartRateFragment();
                 break;
             case 3:
-                fragment = new StressFragment();
-                break;
-            case 4:
                 fragment = new AgeFragment();
                 break;
             default:
