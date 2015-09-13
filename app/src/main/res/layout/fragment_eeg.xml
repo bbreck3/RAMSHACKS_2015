@@ -1,9 +1,128 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="edu.vcu.ramhacks.fragments.EEGFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <Spinner
+        android:id="@+id/muses_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/refresh" />
+        <Button
+            android:id="@+id/connect"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/connect" />
+        <Button
+            android:id="@+id/disconnect"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:text="@string/disconnect" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:text="@string/status" />
+    <TextView
+        android:id="@+id/con_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:text="@string/undefined" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="Theta:" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="Alpha:" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="Beta:" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="Gamma:" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/elem1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="@string/init_val" />
+        <TextView
+            android:id="@+id/elem2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="@string/init_val" />
+        <TextView
+            android:id="@+id/elem3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="@string/init_val" />
+        <TextView
+            android:id="@+id/elem4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="@string/init_val" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/truth"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:background="#0F0"
+        android:text="Truth" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/pause"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="@string/pause" />
+    </LinearLayout>
+
+</LinearLayout>
