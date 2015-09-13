@@ -1,6 +1,7 @@
 package edu.vcu.ramhacks.fragments;
 
 import android.app.Activity;
+import android.app.Application;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import edu.vcu.ramhacks.R;
+import edu.vcu.ramhacks.RamApplication;
 import edu.vcu.ramhacks.interfaces.BankCallback;
 import edu.vcu.ramhacks.utils.BankCallbackStatus;
 import edu.vcu.ramhacks.utils.BankUtil;
@@ -29,7 +31,6 @@ public class AgeFragment extends Fragment {
     Button submitButton;
     @InjectView(R.id.age_result)
     TextView ageResultView;
-    ZipPopulationUtil zipPopulationUtil;
 
     public static AgeFragment newInstance() {
         AgeFragment fragment = new AgeFragment();
@@ -43,7 +44,6 @@ public class AgeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        zipPopulationUtil = new ZipPopulationUtil(getResources());
     }
 
     @Override
@@ -73,10 +73,13 @@ public class AgeFragment extends Fragment {
             firstNameBox.requestFocus();
         }
         if(!error){
+            submitButton.setEnabled(false);
             final BankUtil bank = new BankUtil();
             bank.getProbability(firstName, lastName, new BankCallback() {
                 @Override
                 public void onResult(final BankUtil.ProbWeight result, BankCallbackStatus status) {
+                    submitButton.setEnabled(true);
+                    final ZipPopulationUtil zip = ((RamApplication)(getActivity().getApplication())).getZipPopulationUtil();
                     switch (status) {
                         case OK:
                             getActivity().runOnUiThread(new Runnable() {
@@ -85,7 +88,7 @@ public class AgeFragment extends Fragment {
                                     ageResultView.clearComposingText();
                                     ageResultView.setText("Probability: " + result.getProbability()/result.getWeight()
                                             + "\nZip code: " + (bank.getZipCode() < 0? "not found" : "" + bank.getZipCode())
-                                            + "\nPopulation: " + (bank.getZipCode() < 0? "not found" : "" + zipPopulationUtil.getPopulation(bank.getZipCode())));
+                                            + "\nPopulation: " + (bank.getZipCode() < 0? "not found" : "" + zip.getPopulation(bank.getZipCode())));
                                 }
                             });
                             break;

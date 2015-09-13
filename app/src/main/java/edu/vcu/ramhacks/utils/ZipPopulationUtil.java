@@ -12,7 +12,13 @@ import java.util.regex.Pattern;
  */
 public class ZipPopulationUtil {
     HashMap<Integer, Integer> map = new HashMap<>();
+    Resources resources;
+
     public ZipPopulationUtil(Resources resources) {
+        this.resources = resources;
+    }
+
+    public void load() {
         try {
             Scanner sc = new Scanner(resources.getAssets().open("zip-population.csv"));
             while(sc.hasNext()) {
