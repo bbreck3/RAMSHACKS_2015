@@ -49,7 +49,7 @@ import edu.vcu.ramhacks.R;
 public class EEGFragment extends Fragment implements OnClickListener {
 
     public int index;
-    public boolean full;
+    public int size;
     public double alpha[];
     public double beta[];
     public double gamma[];
@@ -181,44 +181,52 @@ public class EEGFragment extends Fragment implements OnClickListener {
                         TextView meanelem4 = (TextView) getView().findViewById(R.id.meanelem4);
                         TextView truth = (TextView) getView().findViewById(R.id.truth);
                         index++;
-                        if(index == 1000) {
-                            full = true;
+                        if(index == 400) {
+                            size = 400;
                             index = 0;
                         }
+                        if(size < 400) size = index + 1;
+                        
                         theta[index] = data.get(Eeg.TP9.ordinal());
-                        alpha[index] = data.get(Eeg.TP9.ordinal());
-                        beta[index] = data.get(Eeg.TP9.ordinal());
-                        gamma[index] = data.get(Eeg.TP9.ordinal());
+                        alpha[index] = data.get(Eeg.FP1.ordinal());
+                        beta[index] = data.get(Eeg.FP2.ordinal());
+                        gamma[index] = data.get(Eeg.TP10.ordinal());
                         double SumTheta = 0;
                         double SumAlpha = 0;
                         double SumBeta = 0;
                         double SumGamma = 0;
-                        for(int i =0; i <= index; i++){
+                        
+                        for(int i =0; i < size; i++){
                             SumTheta += theta[i];
                             SumAlpha += alpha[i];
                             SumBeta += beta[i];
                             SumGamma += gamma[i];
                         }
-                        SumTheta = SumTheta /(double)(index+1);
-                        SumAlpha = SumAlpha /(double)(index+1);
-                        SumBeta = SumBeta /(double)(index+1);
-                        SumGamma = SumGamma /(double)(index+1);
+                        
+                        SumTheta = SumTheta /(double)(size);
+                        SumAlpha = SumAlpha /(double)(size);
+                        SumBeta = SumBeta /(double)(size);
+                        SumGamma = SumGamma /(double)(size);
+                        
                         meanelem1.setText(Double.toString(SumTheta));
                         meanelem2.setText(Double.toString(SumAlpha));
                         meanelem3.setText(Double.toString(SumBeta));
-                        meanelem4.setText(Double.toString(SumBeta));
+                        meanelem4.setText(Double.toString(SumGamma));
+                        
                         double SumDiff = Math.abs(SumTheta - data.get(Eeg.TP9.ordinal())) +
                                         Math.abs(SumAlpha - data.get(Eeg.FP1.ordinal())) +
                                 Math.abs(SumBeta - data.get(Eeg.FP2.ordinal())) +
                                 Math.abs(SumGamma - data.get(Eeg.TP10.ordinal()));
-                        if(SumDiff > 0.5){
-                            truth.setText("Lie");
-
+                                
+                        if(SumDiff > 0.40){
+                            truth.setText("Lie / Stresed");
+                            truth.setBackgroundColor(Color.Red);
                         }
-                        else{
-                            truth.setText("Truth");
-
+                        else if(SumDiff < 0.35){
+                            truth.setText("Truth / Calm");
+                            truth.setBackgroundColor(Color.GREEN);
                         }
+                        
                         elem1.setText(String.format(
                                 "%6.2f", data.get(Eeg.TP9.ordinal())));
                         elem2.setText(String.format(
@@ -421,7 +429,7 @@ public class EEGFragment extends Fragment implements OnClickListener {
         fileWriter.addAnnotationString(1, "MainActivity onCreate");
         dataListener.setFileWriter(fileWriter);
         index = 0;
-        full = false;
+        full = 0;
         alpha = new double[1000];
         beta= new double[1000];
         gamma= new double[1000];
